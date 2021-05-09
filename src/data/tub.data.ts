@@ -10,25 +10,25 @@ export enum AxisQuantity { // количество осей
   four,
 }
 
-export enum MaterialTypes { // типы материалов
+export enum TubMaterialTypes { // типы материалов
   nailsWithCount, // гвозди 6мм, штуки
   nailsWithWeight, // гвозди 6мм, кг
   typicalThrustBar, // типовой упорный брусок
   typicalSideBar// типовой боковой брусок
 }
 
-export const MATERIAL_TYPES = [
-  MaterialTypes.nailsWithCount,
-  MaterialTypes.nailsWithWeight,
-  MaterialTypes.typicalThrustBar,
-  MaterialTypes.typicalSideBar,
+export const TUB_MATERIAL_TYPES = [
+  TubMaterialTypes.nailsWithCount,
+  TubMaterialTypes.nailsWithWeight,
+  TubMaterialTypes.typicalThrustBar,
+  TubMaterialTypes.typicalSideBar,
 ];
 
-export const TYPE_MAP = {
-  [MaterialTypes.nailsWithCount]: 'гвозди 6мм, штуки',
-  [MaterialTypes.nailsWithWeight]: 'гвозди 6мм, кг',
-  [MaterialTypes.typicalThrustBar]: 'типовой упорный брусок',
-  [MaterialTypes.typicalSideBar]: 'типовой боковой брусок',
+export const TUB_MATERIAL_TYPE_MAP = {
+  [TubMaterialTypes.nailsWithCount]: 'гвозди 6мм, штуки',
+  [TubMaterialTypes.nailsWithWeight]: 'гвозди 6мм, кг',
+  [TubMaterialTypes.typicalThrustBar]: 'типовой упорный брусок',
+  [TubMaterialTypes.typicalSideBar]: 'типовой боковой брусок',
 }
 
 export const AXIS_TYPES = [AxisQuantity.two, AxisQuantity.three, AxisQuantity.four];
@@ -44,36 +44,35 @@ export interface Machine {
   [AxisQuantity.four]?: number;
 }
 
-export interface MachineData {
+export interface TubMachineData {
   weight: { from: number; to: number };
-  materials: { [key in MaterialTypes]: { [key in AxisQuantity]: number } }
+  materials: { [key in TubMaterialTypes]: { [key in AxisQuantity]: number } }
 }
 
-// РАСЧЕТЫ ТУБ
-
-export const MATERIALS_DATA: MachineData[] = [
+// Таблицы "РАСЧЕТЫ ТУБ"
+export const TUB_MATERIALS_DATA: TubMachineData[] = [
   {
     weight: {
       from: 0,
       to: 2,
     },
     materials: {
-      [MaterialTypes.nailsWithCount]: {
+      [TubMaterialTypes.nailsWithCount]: {
         [AxisQuantity.two]: 40,
         [AxisQuantity.three]: 40,
         [AxisQuantity.four]: 40,
       },
-      [MaterialTypes.nailsWithWeight]: {
+      [TubMaterialTypes.nailsWithWeight]: {
         [AxisQuantity.two]: 1.8,
         [AxisQuantity.three]: 1.8,
         [AxisQuantity.four]: 1.8,
       },
-      [MaterialTypes.typicalThrustBar]: {
+      [TubMaterialTypes.typicalThrustBar]: {
         [AxisQuantity.two]: 4,
         [AxisQuantity.three]: 4,
         [AxisQuantity.four]: 4,
       },
-      [MaterialTypes.typicalSideBar]: {
+      [TubMaterialTypes.typicalSideBar]: {
         [AxisQuantity.two]: 4,
         [AxisQuantity.three]: 4,
         [AxisQuantity.four]: 4,
@@ -86,22 +85,22 @@ export const MATERIALS_DATA: MachineData[] = [
       to: 4,
     },
     materials: {
-      [MaterialTypes.nailsWithCount]: {
+      [TubMaterialTypes.nailsWithCount]: {
         [AxisQuantity.two]: 40,
         [AxisQuantity.three]: 40,
         [AxisQuantity.four]: 40,
       },
-      [MaterialTypes.nailsWithWeight]: {
+      [TubMaterialTypes.nailsWithWeight]: {
         [AxisQuantity.two]: 1.8,
         [AxisQuantity.three]: 1.8,
         [AxisQuantity.four]: 1.8,
       },
-      [MaterialTypes.typicalThrustBar]: {
+      [TubMaterialTypes.typicalThrustBar]: {
         [AxisQuantity.two]: 4,
         [AxisQuantity.three]: 4,
         [AxisQuantity.four]: 4,
       },
-      [MaterialTypes.typicalSideBar]: {
+      [TubMaterialTypes.typicalSideBar]: {
         [AxisQuantity.two]: 4,
         [AxisQuantity.three]: 4,
         [AxisQuantity.four]: 4,
@@ -114,22 +113,22 @@ export const MATERIALS_DATA: MachineData[] = [
       to: 5.5,
     },
     materials: {
-      [MaterialTypes.nailsWithCount]: {
+      [TubMaterialTypes.nailsWithCount]: {
         [AxisQuantity.two]: 40,
         [AxisQuantity.three]: 40,
         [AxisQuantity.four]: 40,
       },
-      [MaterialTypes.nailsWithWeight]: {
+      [TubMaterialTypes.nailsWithWeight]: {
         [AxisQuantity.two]: 1.8,
         [AxisQuantity.three]: 1.8,
         [AxisQuantity.four]: 1.8,
       },
-      [MaterialTypes.typicalThrustBar]: {
+      [TubMaterialTypes.typicalThrustBar]: {
         [AxisQuantity.two]: 4,
         [AxisQuantity.three]: 4,
         [AxisQuantity.four]: 4,
       },
-      [MaterialTypes.typicalSideBar]: {
+      [TubMaterialTypes.typicalSideBar]: {
         [AxisQuantity.two]: 4,
         [AxisQuantity.three]: 4,
         [AxisQuantity.four]: 4,
@@ -142,22 +141,22 @@ export const MATERIALS_DATA: MachineData[] = [
       to: 6.3,
     },
     materials: {
-      [MaterialTypes.nailsWithCount]: {
+      [TubMaterialTypes.nailsWithCount]: {
         [AxisQuantity.two]: 64,
         [AxisQuantity.three]: 64,
         [AxisQuantity.four]: 64,
       },
-      [MaterialTypes.nailsWithWeight]: {
+      [TubMaterialTypes.nailsWithWeight]: {
         [AxisQuantity.two]: 2.9,
         [AxisQuantity.three]: 2.9,
         [AxisQuantity.four]: 2.9,
       },
-      [MaterialTypes.typicalThrustBar]: {
+      [TubMaterialTypes.typicalThrustBar]: {
         [AxisQuantity.two]: 8,
         [AxisQuantity.three]: 8,
         [AxisQuantity.four]: 8,
       },
-      [MaterialTypes.typicalSideBar]: {
+      [TubMaterialTypes.typicalSideBar]: {
         [AxisQuantity.two]: 4,
         [AxisQuantity.three]: 4,
         [AxisQuantity.four]: 4,
@@ -170,22 +169,22 @@ export const MATERIALS_DATA: MachineData[] = [
       to: 12,
     },
     materials: {
-      [MaterialTypes.nailsWithCount]: {
+      [TubMaterialTypes.nailsWithCount]: {
         [AxisQuantity.two]: 64,
         [AxisQuantity.three]: 64,
         [AxisQuantity.four]: 64,
       },
-      [MaterialTypes.nailsWithWeight]: {
+      [TubMaterialTypes.nailsWithWeight]: {
         [AxisQuantity.two]: 2.9,
         [AxisQuantity.three]: 2.9,
         [AxisQuantity.four]: 2.9,
       },
-      [MaterialTypes.typicalThrustBar]: {
+      [TubMaterialTypes.typicalThrustBar]: {
         [AxisQuantity.two]: 8,
         [AxisQuantity.three]: 8,
         [AxisQuantity.four]: 8,
       },
-      [MaterialTypes.typicalSideBar]: {
+      [TubMaterialTypes.typicalSideBar]: {
         [AxisQuantity.two]: 4,
         [AxisQuantity.three]: 4,
         [AxisQuantity.four]: 4,
@@ -194,7 +193,8 @@ export const MATERIALS_DATA: MachineData[] = [
   },
 ];
 
-export const MACHINES: Machine[] = [
+// Таблица "ТУБ" (Крепление с помощью типовых упорных брусков)
+export const TUB_MACHINES: Machine[] = [
   {
     weight: {
       from: 0,
