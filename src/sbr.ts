@@ -13,6 +13,7 @@ import {
   CalculationType,
   Machine,
 } from './data/tub.data';
+import { displayRes } from './index';
 
 type SbrResult = { [key in SbrMaterialTypes]: number } & { weight?: { from: number; to: number } };
 
@@ -53,8 +54,7 @@ function getSbrResults(machines: Machine[], materialsData: SbrMachineData[]): { 
   });
 
   // сумма всех промежуточных в финальный результат
-  const tubFinalResult: { [key: string]: number } = {
-  };
+  const tubFinalResult: { [key: string]: number } = {};
 
   SBR_MATERIAL_TYPES.forEach(materialKey => {
     tubFinalResult[SBR_MATERIAL_TYPE_MAP[materialKey]] = sbrResults.reduce((prev, result) => {
@@ -65,7 +65,9 @@ function getSbrResults(machines: Machine[], materialsData: SbrMachineData[]): { 
   return tubFinalResult;
 }
 
-console.log('CБР:', getSbrResults(SBR_MACHINES, SBR_MATERIALS_DATA));
+const sbr: { [key: string]: number } = getSbrResults(SBR_MACHINES, SBR_MATERIALS_DATA);
+displayRes(sbr, 'СБР');
+console.log('CБР:', sbr);
 /*
   Вывод результата расчетов:
   бруски упорны: 40

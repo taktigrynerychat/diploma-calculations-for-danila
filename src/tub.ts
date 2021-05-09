@@ -11,6 +11,7 @@ import {
   TubMaterialTypes,
   TUB_MATERIAL_TYPE_MAP,
 } from './data/tub.data';
+import { displayRes } from './index';
 
 type TubResult = { [key in TubMaterialTypes]: number } & { weight?: { from: number; to: number } };
 
@@ -60,8 +61,9 @@ function getTubResults(machines: Machine[], materialsData: TubMachineData[]): { 
 
   return tubFinalResult;
 }
-
+const tub = getTubResults(TUB_MACHINES, TUB_MATERIALS_DATA);
 console.log('ТУБ:', getTubResults(TUB_MACHINES, TUB_MATERIALS_DATA));
+displayRes(tub, 'ТУБ');
 /*
   Вывод результата расчетов:
   гвозди 6мм, кг: 91.69999999999999

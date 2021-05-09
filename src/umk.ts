@@ -2,6 +2,7 @@
 import * as _ from 'lodash/fp';
 import { AXIS_TYPES, CalculationType } from './data/tub.data';
 import { SET_DATA, SET_QUANTITY_DATA, SET_TYPES_MAP, SetData, SetQuantity, SetTypes } from './data/umk.data';
+import { displayRes } from './index';
 
 // фнкция расчета УМК для одной строки из двух таблиц
 function UMK(set: SetData, quantity: SetQuantity): number {
@@ -33,7 +34,9 @@ function getUmkResults(sets: SetData[], setQuantity: SetQuantity[]): { [key: str
   };
 }
 
-console.log('УМК:', getUmkResults(SET_DATA, SET_QUANTITY_DATA));
+const umk = getUmkResults(SET_DATA, SET_QUANTITY_DATA);
+displayRes(umk, 'УМК');
+console.log('УМК:', umk);
 /*
   Вывод результата рассчетов:
   УМК-ЛК: 0,
