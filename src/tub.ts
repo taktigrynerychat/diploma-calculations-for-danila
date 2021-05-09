@@ -1,6 +1,6 @@
 // @ts-ignore
 import * as _ from "lodash/fp";
-import { AXIS_TYPES, Machine, MachineData, MACHINES, MATERIAL_TYPES, MATERIALS_DATA, MaterialTypes, TYPE_MAP } from './models';
+import { AXIS_TYPES, Machine, MachineData, MACHINES, MATERIAL_TYPES, MATERIALS_DATA, MaterialTypes, TYPE_MAP } from './data/tub.data';
 
 type TubResult = { [key in MaterialTypes]: number } & { weight?: { from: number; to: number } };
 

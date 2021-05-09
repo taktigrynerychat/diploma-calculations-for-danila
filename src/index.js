@@ -1,2 +1,2 @@
-import './models';
+import './data/tub.data';
 import './tub';
