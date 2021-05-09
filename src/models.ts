@@ -1,19 +1,16 @@
-// @ts-ignore
-import * as _ from 'lodash/fp';
-
-enum CalculationType { // тип расчета
+export enum CalculationType { // тип расчета
   UMK,
   TUB,
   SBR,
 }
 
-enum AxisQuantity { // количество осей
+export enum AxisQuantity { // количество осей
   two = 2,
   three,
   four,
 }
 
-enum MaterialTypes { // типы материалов
+export enum MaterialTypes { // типы материалов
   nailsWithCount, // гвозди 6мм, штуки
   nailsWithWeight, // гвозди 6мм, кг
   typicalThrustBar, // типовой упорный брусок
@@ -36,7 +33,7 @@ export const TYPE_MAP = {
 
 export const AXIS_TYPES = [AxisQuantity.two, AxisQuantity.three, AxisQuantity.four];
 
-interface Machine {
+export interface Machine {
   hasBrakes: boolean;
   weight: { from: number; to: number };
   calculationType: CalculationType;
@@ -45,14 +42,14 @@ interface Machine {
   [AxisQuantity.four]?: number;
 }
 
-interface MachineData {
+export interface MachineData {
   weight: { from: number; to: number };
   materials: { [key in MaterialTypes]: { [key in AxisQuantity]: number } }
 }
 
 // РАСЧЕТЫ ТУБ
 
-const MATERIALS_DATA: MachineData[] = [
+export const MATERIALS_DATA: MachineData[] = [
   {
     weight: {
       from: 0,
@@ -195,7 +192,7 @@ const MATERIALS_DATA: MachineData[] = [
   },
 ];
 
-const MACHINES: Machine[] = [
+export const MACHINES: Machine[] = [
   {
     weight: {
       from: 0,
@@ -268,62 +265,3 @@ const MACHINES: Machine[] = [
     calculationType: CalculationType.SBR,
   },
 ];
-
-type TubResult = { [key in MaterialTypes]: number } & { weight?: { from: number; to: number } };
-
-// функция, расчитывающая промежуточный результат для одной машины
-export function TUB(machine: Machine, data: MachineData): TubResult {
-  const result: TubResult = {
-    weight: machine.weight,
-    [MaterialTypes.nailsWithCount]: 0,
-    [MaterialTypes.nailsWithWeight]: 0,
-    [MaterialTypes.typicalThrustBar]: 0,
-    [MaterialTypes.typicalSideBar]: 0,
-  };
-
-  MATERIAL_TYPES
-    .forEach(materialKey => {
-      result[materialKey] = AXIS_TYPES.reduce((prev, axis) => {
-        return prev + data.materials[materialKey][axis] * machine[axis];
-      }, 0);
-    });
-
-  return result;
-}
-
-// главная функция для расчета ТУБ для всех машин
-function getTubResults(machines: Machine[], materialsData: MachineData[]): { [key: string]: number } {
-
-  // промежуточные результаты для каждой из машин
-  const tubResults: TubResult[] = [];
-
-  machines.forEach(machine => {
-    materialsData.forEach(data => {
-      if (_.isEqual(machine.weight, data.weight)) {
-        tubResults.push(TUB(machine, data));
-      }
-    });
-  });
-
-  // сумма всех промежуточных в финальный результат
-  const tubFinalResult: { [key: string]: number } = {
-  };
-
-  MATERIAL_TYPES.forEach(materialKey => {
-    tubFinalResult[TYPE_MAP[materialKey]] = tubResults.reduce((prev, result) => {
-      return prev + result[materialKey];
-    }, 0);
-  });
-
-  return tubFinalResult;
-}
-
-console.log('ТУБ:', getTubResults(MACHINES, MATERIALS_DATA));
-/*
-  Вывод результата расчетов:
-  гвозди 6мм, кг: 91.69999999999999
-  гвозди 6мм, штуки: 2032
-  типовой боковой брусок: 172
-  типовой упорный брусок: 224
-* */
-
