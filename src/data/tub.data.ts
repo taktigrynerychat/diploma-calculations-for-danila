@@ -37,6 +37,8 @@ export interface Machine {
   hasBrakes: boolean;
   weight: { from: number; to: number };
   calculationType: CalculationType;
+  name?: string;
+  type?:number;
   [AxisQuantity.two]?: number;
   [AxisQuantity.three]?: number;
   [AxisQuantity.four]?: number;

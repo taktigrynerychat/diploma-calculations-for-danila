@@ -1,6 +1,16 @@
 // @ts-ignore
-import * as _ from "lodash/fp";
-import { AXIS_TYPES, Machine, MachineData, MACHINES, MATERIAL_TYPES, MATERIALS_DATA, MaterialTypes, TYPE_MAP } from './data/tub.data';
+import * as _ from 'lodash/fp';
+import {
+  AXIS_TYPES,
+  CalculationType,
+  Machine,
+  MachineData,
+  MACHINES,
+  MATERIAL_TYPES,
+  MATERIALS_DATA,
+  MaterialTypes,
+  TYPE_MAP,
+} from './data/tub.data';
 
 type TubResult = { [key in MaterialTypes]: number } & { weight?: { from: number; to: number } };
 
@@ -32,7 +42,7 @@ function getTubResults(machines: Machine[], materialsData: MachineData[]): { [ke
 
   machines.forEach(machine => {
     materialsData.forEach(data => {
-      if (_.isEqual(machine.weight, data.weight)) {
+      if (_.isEqual(machine.weight, data.weight) && machine.calculationType === CalculationType.TUB) {
         tubResults.push(TUB(machine, data));
       }
     });
